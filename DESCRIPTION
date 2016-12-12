@@ -1,0 +1,13 @@
+Package: rutilstb
+Type: Package
+Title: A Package with Some Useful R Utilities
+Version: 0.1.0
+Author: person("Timothy", "Book",
+    email = "TimothyKBook@gmail.com",
+    role = c("aut", "cre"))
+URL: https://github.com/TimothyKBook/
+Description: Some quick, simple, easy utilities I wrote that may be
+    of use to some.
+License: MIT
+LazyData: TRUE
+RoxygenNote: 5.0.1

@@ -6,8 +6,8 @@
 #'
 #' @return No returns (null).
 #' @export
-unpack <- function(list) {
-  objects <- names(list)
+unpack <- function(mylist) {
+  objects <- names(mylist)
   for (obj in objects) {
     assign(obj, mylist[[obj]], envir = parent.env(environment()))
   }

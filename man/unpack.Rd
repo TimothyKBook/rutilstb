@@ -4,7 +4,7 @@
 \alias{unpack}
 \title{Unpacking a list}
 \usage{
-unpack(list)
+unpack(mylist, env = globalenv())
 }
 \arguments{
 \item{list}{A list to be unpacked.}
@@ -13,6 +13,6 @@ unpack(list)
 No returns (null).
 }
 \description{
-Unpacks a list into the parent environment.
+Unpacks a list into the global (or selected) environment.
 }
 

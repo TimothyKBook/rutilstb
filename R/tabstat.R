@@ -3,16 +3,18 @@
 #' Creates a 'tabstat' summary statistic table, similar to the ones produced
 #' in Stata.
 #'
-#' @param var The variable to be summarised.
+#' @param var The variable to be summarised.  Must be entered as character.
 #' @param data The data frame to be summarised.
 #' @param by A string of character variables to group summaries into.
 #' @param fns A list of summary functions.  Use `length` for rowcounts by
 #' category. Default already contains many useful statistics.
+#' @param na.rm Logical, whether or not to remove NAs.  Defaults to true.
 #'
 #' @return A dataframe of summary statistics.
 #' @export
 tabstat <- function(var, data, by = NULL,
-                    fns = list(mean, sd, min, median, max, length)) {
+                    fns = list(mean, sd, min, median, max, length),
+                    na.rm = TRUE) {
 
   fn_names <- substitute(fns)
   fn_names <- unlist(strsplit(deparse(fn_names), ","))
@@ -22,9 +24,13 @@ tabstat <- function(var, data, by = NULL,
 
   out_df <- aggregate(data, by = data[by], FUN = identity)[by]
 
+  if (na.rm) {
+    data <- data[complete.cases(data[var]),]
+  }
+
   for (fn in fns) {
-    agg <- aggregate(data, by = data[by], FUN = fn)
-    out_df <- data.frame(out_df, agg[deparse(substitute(var))])
+    agg <- aggregate(data[var], by = data[by], FUN = fn)
+    out_df <- data.frame(out_df, agg[var])
   }
 
   colnames(out_df) <- c(by, fn_names)

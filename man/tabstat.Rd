@@ -5,17 +5,19 @@
 \title{Tabstat}
 \usage{
 tabstat(var, data, by = NULL, fns = list(mean, sd, min, median, max,
-  length))
+  length), na.rm = TRUE)
 }
 \arguments{
-\item{var}{The variable to be summarised.}
+\item{var}{The variable to be summarised.  Must be entered as character.}
 
 \item{data}{The data frame to be summarised.}
 
 \item{by}{A string of character variables to group summaries into.}
 
 \item{fns}{A list of summary functions.  Use `length` for rowcounts by
-category.}
+category. Default already contains many useful statistics.}
+
+\item{na.rm}{Logical, whether or not to remove NAs.  Defaults to true.}
 }
 \value{
 A dataframe of summary statistics.

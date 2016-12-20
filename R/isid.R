@@ -1,8 +1,9 @@
 #' Check to see if a column/vector can be used as an id variable.
 #'
-#' @param x Vector or column of dataframe.
+#' @param x Vector or dataframe.
 #'
-#' @return logical indicating whether or not `x` has distinct elements.
+#' @return logical indicating whether or not `x` has distinct elements.  If a
+#' dataframe was given, a vector of logicals.
 #' @export
 isid <- function(x) {
   if (is.vector(x)) {
@@ -16,12 +17,13 @@ isid <- function(x) {
 
   } else if (is.data.frame(x)) {
 
-    n <- nrow(x)
-    if (nrow(unique(x)) == n) {
-      return(TRUE)
-    } else {
-      return(FALSE)
-    }
+    out <- lapply(x, function(var) {
+      n <- length(var)
+      out <- length(unique(var)) == n
+      return(out)
+    })
+
+    return(unlist(out))
 
   } else {
 

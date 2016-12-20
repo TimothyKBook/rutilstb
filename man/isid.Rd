@@ -7,10 +7,11 @@
 isid(x)
 }
 \arguments{
-\item{x}{Vector or column of dataframe.}
+\item{x}{Vector or dataframe.}
 }
 \value{
-logical indicating whether or not `x` has distinct elements.
+logical indicating whether or not `x` has distinct elements.  If a
+dataframe was given, a vector of logicals.
 }
 \description{
 Check to see if a column/vector can be used as an id variable.

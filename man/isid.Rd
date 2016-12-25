@@ -4,10 +4,12 @@
 \alias{isid}
 \title{Check to see if a column/vector can be used as an id variable.}
 \usage{
-isid(x)
+isid(x, keys = NULL)
 }
 \arguments{
 \item{x}{Vector or dataframe.}
+
+\item{keys}{Combination of variables to check as unique key.}
 }
 \value{
 logical indicating whether or not `x` has distinct elements.  If a

@@ -2,5 +2,6 @@
 
 export(colMatcher)
 export(isid)
+export(mdesc)
 export(tabstat)
 export(unpack)

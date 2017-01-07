@@ -7,7 +7,7 @@
 mdesc(df)
 }
 \arguments{
-\item{df}{A dataframe to analyze.}
+\item{df}{A dataframe or vector to analyze.}
 }
 \value{
 An object of type dataframe describing where missing values occur and

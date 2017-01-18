@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Timothy K. Book" />
+
+
+<title>Tim Book’s R Utilities (rutilstb)</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Tim Book’s R Utilities (<code>rutilstb</code>)</h1>
+<h4 class="author"><em>Timothy K. Book</em></h4>
+
+
+
+<p>This is a package of various functions that I’ve made which I’ve found useful while working on different projects. They fall into to two categories:</p>
+<ol style="list-style-type: decimal">
+<li>Functions I’ve found convenient while using Stata, and felt a need to port them into R.</li>
+<li>Functions I’ve needed for a specific, narrow purpose.</li>
+</ol>
+<div id="functions-ported-from-stata" class="section level2">
+<h2>Functions Ported from Stata</h2>
+<div id="the-isid-function" class="section level3">
+<h3>The <code>isid</code> Function</h3>
+<p>The <code>isid</code> function can be used to detect whether or not a variable (or group of variables) has unique values. It has three uses:</p>
+<div id="use-1-vectors" class="section level4">
+<h4>Use #1: Vectors</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">5</span>
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isid</span>(a)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isid</span>(b)</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+<div id="use-2-data-frames" class="section level4">
+<h4>Use #2: Data Frames</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">users &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">user_id =</span> <span class="dv">1</span>:<span class="dv">5</span>,
+  <span class="dt">first_name =</span> <span class="kw">c</span>(<span class="st">'Tim'</span>, <span class="st">'Brandon'</span>, <span class="st">'Brandon'</span>, <span class="st">'Arya'</span>, <span class="st">'Cersei'</span>),
+  <span class="dt">last_name =</span> <span class="kw">c</span>(<span class="st">'Book'</span>, <span class="st">'Stark'</span>, <span class="st">'Tully'</span>, <span class="st">'Stark'</span>, <span class="st">'Lannister'</span>)
+)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isid</span>(users)</code></pre></div>
+<pre><code>##    user_id first_name  last_name 
+##       TRUE      FALSE      FALSE</code></pre>
+</div>
+<div id="use-3-combinations-of-variables-in-a-data-frame" class="section level4">
+<h4>Use #3: Combinations of Variables in a Data Frame</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isid</span>(users, <span class="dt">keys =</span> <span class="kw">c</span>(<span class="st">'first_name'</span>, <span class="st">'last_name'</span>))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+</div>
+</div>
+<div id="the-tabstat-function" class="section level3">
+<h3>The <code>tabstat</code> Function</h3>
+<p>The <code>tabstat</code> function can be used to view statistics based on categorical variables within a data frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tabstat</span>(<span class="st">'mpg'</span>, mtcars, <span class="dt">by =</span> <span class="st">'cyl'</span>)</code></pre></div>
+<pre><code>##   cyl     mean       sd  min median  max count
+## 1   4 26.66364 4.509828 21.4   26.0 33.9    11
+## 2   6 19.74286 1.453567 17.8   19.7 21.4     7
+## 3   8 15.10000 2.560048 10.4   15.2 19.2    14</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tabstat</span>(<span class="st">'mpg'</span>, mtcars, <span class="dt">by =</span> <span class="st">'cyl'</span>, <span class="dt">fns =</span> <span class="kw">list</span>(median, IQR, length))</code></pre></div>
+<pre><code>##   cyl median  IQR count
+## 1   4   26.0 7.60    11
+## 2   6   19.7 2.35     7
+## 3   8   15.2 1.85    14</code></pre>
+</div>
+<div id="the-mdesc-function" class="section level3">
+<h3>The <code>mdesc</code> Function</h3>
+<p>The <code>mdesc</code> function gives a description of missing values in a data frame, and where they are located.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">5</span>,
+  <span class="dt">b =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">NA</span>, <span class="dv">4</span>, <span class="dv">5</span>),
+  <span class="dt">c =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">'x'</span>, <span class="st">'y'</span>, <span class="st">'z'</span>, <span class="ot">NA</span>)
+)
+<span class="kw">mdesc</span>(df)</code></pre></div>
+<pre><code>##   variable missing total percent_missing
+## 1        a       0     5             0.0
+## 2        b       1     5             0.2
+## 3        c       2     5             0.4</code></pre>
+</div>
+</div>
+<div id="quick-functions-of-narrow-use" class="section level2">
+<h2>Quick Functions of Narrow Use</h2>
+<div id="the-colmatcher-function" class="section level3">
+<h3>The <code>colMatcher</code> Function</h3>
+<p>The <code>colMatcher</code> function tells the user if any two columns are identical.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">x =</span> <span class="dv">1</span>:<span class="dv">5</span>,
+  <span class="dt">y =</span> <span class="dv">101</span>:<span class="dv">105</span>,
+  <span class="dt">z =</span> <span class="dv">1</span>:<span class="dv">5</span>,
+  <span class="dt">w =</span> <span class="dv">101</span>:<span class="dv">105</span>,
+  <span class="dt">v =</span> letters[<span class="dv">1</span>:<span class="dv">5</span>]
+)
+<span class="kw">colMatcher</span>(df)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colMatcher</span>(df, <span class="dt">return_index =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>##      col1 col2
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+</div>
+<div id="the-dfsplit-function" class="section level3">
+<h3>The <code>dfSplit</code> Function</h3>
+<p>The <code>dfSplit</code> function splits a <code>data.frame</code> into parts, either via a training/test split, or a K-fold split.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(
+  <span class="kw">rnorm</span>(<span class="dv">100</span> *<span class="st"> </span><span class="dv">4</span>), <span class="dv">100</span>, <span class="dv">4</span>
+))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split1 &lt;-<span class="st"> </span><span class="kw">dfSplit</span>(df, <span class="dt">method =</span> <span class="st">'traintest'</span>, <span class="dt">train_frac =</span> <span class="fl">0.8</span>)
+<span class="kw">lapply</span>(split1, dim)</code></pre></div>
+<pre><code>## $train
+## [1] 80  4
+## 
+## $test
+## [1] 20  4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split2 &lt;-<span class="st"> </span><span class="kw">dfSplit</span>(df, <span class="dt">method =</span> <span class="st">'traintest'</span>, <span class="dt">train_n =</span> <span class="dv">70</span>)
+<span class="kw">lapply</span>(split2, dim)</code></pre></div>
+<pre><code>## $train
+## [1] 70  4
+## 
+## $test
+## [1] 30  4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split3 &lt;-<span class="st"> </span><span class="kw">dfSplit</span>(df, <span class="dt">method =</span> <span class="st">'kfold'</span>, <span class="dt">K =</span> <span class="dv">4</span>)
+<span class="kw">lapply</span>(split3, dim)</code></pre></div>
+<pre><code>## $`1`
+## [1] 25  5
+## 
+## $`2`
+## [1] 25  5
+## 
+## $`3`
+## [1] 25  5
+## 
+## $`4`
+## [1] 25  5</code></pre>
+</div>
+<div id="the-fullranker-function" class="section level3">
+<h3>The <code>fullRanker</code> Function</h3>
+<p>The <code>fullRanker</code> function takes a matrix or <code>data.frame</code> and successively removes columns until it is of full rank.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X1 &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="dv">4</span>)
+X2 &lt;-<span class="st"> </span><span class="kw">cbind</span>(X1, <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fullRanker</span>(X1)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1    0
+## [4,]    0    0    0    1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fullRanker</span>(X2)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    0    0    0    1
+## [2,]    1    0    0    1
+## [3,]    0    1    0    1
+## [4,]    0    0    1    1</code></pre>
+</div>
+<div id="the-unpack-function" class="section level3">
+<h3>The <code>unpack</code> Function</h3>
+<p>The <code>unpack</code> function simply takes objects in a list, and unpacks them into the global (or otherwise unspecified) environment.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())
+<span class="kw">ls</span>()</code></pre></div>
+<pre><code>## character(0)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mylist &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span>:<span class="dv">5</span>,
+               <span class="dt">b =</span> letters[<span class="dv">1</span>:<span class="dv">6</span>],
+               <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">7</span>))
+<span class="kw">unpack</span>(mylist)
+<span class="kw">ls</span>()</code></pre></div>
+<pre><code>## [1] &quot;a&quot;      &quot;b&quot;      &quot;c&quot;      &quot;mylist&quot;</code></pre>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

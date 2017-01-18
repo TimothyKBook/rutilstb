@@ -1,5 +1,5 @@
 This is a package of various functions that I've made which I've found
-useful while working on different projects. They fall into to two
+useful while working on different projects. They fall into two
 categories:
 
 1.  Functions I've found convenient while using Stata, and felt a need
@@ -37,7 +37,7 @@ group of variables) has unique values. It has three uses:
 
     isid(users)
 
-    ##    user_id first_name  last_name 
+    ##    user_id first_name  last_name
     ##       TRUE      FALSE      FALSE
 
 #### Use \#3: Combinations of Variables in a Data Frame
@@ -121,7 +121,7 @@ training/test split, or a K-fold split.
 
     ## $train
     ## [1] 80  4
-    ## 
+    ##
     ## $test
     ## [1] 20  4
 
@@ -130,7 +130,7 @@ training/test split, or a K-fold split.
 
     ## $train
     ## [1] 70  4
-    ## 
+    ##
     ## $test
     ## [1] 30  4
 
@@ -139,13 +139,13 @@ training/test split, or a K-fold split.
 
     ## $`1`
     ## [1] 25  5
-    ## 
+    ##
     ## $`2`
     ## [1] 25  5
-    ## 
+    ##
     ## $`3`
     ## [1] 25  5
-    ## 
+    ##
     ## $`4`
     ## [1] 25  5
 

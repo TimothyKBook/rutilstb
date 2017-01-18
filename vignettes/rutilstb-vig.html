@@ -72,7 +72,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<p>This is a package of various functions that I’ve made which I’ve found useful while working on different projects. They fall into to two categories:</p>
+<p>This is a package of various functions that I’ve made which I’ve found useful while working on different projects. They fall into two categories:</p>
 <ol style="list-style-type: decimal">
 <li>Functions I’ve found convenient while using Stata, and felt a need to port them into R.</li>
 <li>Functions I’ve needed for a specific, narrow purpose.</li>
@@ -99,7 +99,7 @@ b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</sp
   <span class="dt">last_name =</span> <span class="kw">c</span>(<span class="st">'Book'</span>, <span class="st">'Stark'</span>, <span class="st">'Tully'</span>, <span class="st">'Stark'</span>, <span class="st">'Lannister'</span>)
 )</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">isid</span>(users)</code></pre></div>
-<pre><code>##    user_id first_name  last_name 
+<pre><code>##    user_id first_name  last_name
 ##       TRUE      FALSE      FALSE</code></pre>
 </div>
 <div id="use-3-combinations-of-variables-in-a-data-frame" class="section level4">
@@ -166,27 +166,27 @@ b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</sp
 <span class="kw">lapply</span>(split1, dim)</code></pre></div>
 <pre><code>## $train
 ## [1] 80  4
-## 
+##
 ## $test
 ## [1] 20  4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split2 &lt;-<span class="st"> </span><span class="kw">dfSplit</span>(df, <span class="dt">method =</span> <span class="st">'traintest'</span>, <span class="dt">train_n =</span> <span class="dv">70</span>)
 <span class="kw">lapply</span>(split2, dim)</code></pre></div>
 <pre><code>## $train
 ## [1] 70  4
-## 
+##
 ## $test
 ## [1] 30  4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">split3 &lt;-<span class="st"> </span><span class="kw">dfSplit</span>(df, <span class="dt">method =</span> <span class="st">'kfold'</span>, <span class="dt">K =</span> <span class="dv">4</span>)
 <span class="kw">lapply</span>(split3, dim)</code></pre></div>
 <pre><code>## $`1`
 ## [1] 25  5
-## 
+##
 ## $`2`
 ## [1] 25  5
-## 
+##
 ## $`3`
 ## [1] 25  5
-## 
+##
 ## $`4`
 ## [1] 25  5</code></pre>
 </div>

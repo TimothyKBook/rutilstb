@@ -9,7 +9,7 @@ vignette: >
 ---
 
 This is a package of various functions that I've made which I've found useful
-while working on different projects.  They fall into to two categories:
+while working on different projects.  They fall into two categories:
 
 1. Functions I've found convenient while using Stata, and felt a need to port
 them into R.

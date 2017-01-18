@@ -6,6 +6,8 @@
 #'
 #' @return A matrix of full rank that is the original matrix with select columns
 #' removed.
+#'
+#' @export
 fullRanker <- function(x) {
 
   # Convert to matrix if given a data.frame

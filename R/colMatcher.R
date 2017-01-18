@@ -12,7 +12,7 @@
 #'
 #' @export
 colMatcher <- function(x, return_index = FALSE) {
-  if (is.data.frame(x) && is.matrix(x)) {
+  if (!(class(x) %in% c('matrix', 'data.frame'))) {
     stop("Please enter a data.frame or matrix!")
   }
 
@@ -21,7 +21,7 @@ colMatcher <- function(x, return_index = FALSE) {
   # TODO: Rewrite loop as an apply statement.
   diff_mat <- matrix(FALSE, p, p)
   for (i in 1:(p - 1)) for (j in (i + 1):p) {
-    diff_mat[i, j] <- all(round(x[,i] - x[,j], 6) == 0)
+    suppressWarnings(diff_mat[i, j] <- all(round(x[,i] - x[,j], 6) == 0))
   }
 
   if (any(diff_mat)) {

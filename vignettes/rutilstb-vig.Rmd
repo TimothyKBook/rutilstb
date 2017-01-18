@@ -1,0 +1,129 @@
+---
+title: "Tim Book's R Utilities (`rutilstb`)"
+author: "Timothy K. Book"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This is a package of various functions that I've made which I've found useful
+while working on different projects.  They fall into to two categories:
+
+1. Functions I've found convenient while using Stata, and felt a need to port
+them into R.
+1. Functions I've needed for a specific, narrow purpose.
+
+```{r, echo = FALSE}
+library(rutilstb)
+```
+
+## Functions Ported from Stata
+### The `isid` Function
+The `isid` function can be used to detect whether or not a variable (or group of
+variables) has unique values.  It has three uses:
+
+#### Use #1: Vectors
+```{r}
+a <- 1:5
+b <- c(1, 1, 2, 3, 4)
+```
+```{r}
+isid(a)
+isid(b)
+```
+#### Use #2: Data Frames
+```{r}
+users <- data.frame(
+  user_id = 1:5,
+  first_name = c('Tim', 'Brandon', 'Brandon', 'Arya', 'Cersei'),
+  last_name = c('Book', 'Stark', 'Tully', 'Stark', 'Lannister')
+)
+```
+```{r}
+isid(users)
+```
+#### Use #3: Combinations of Variables in a Data Frame
+```{r}
+isid(users, keys = c('first_name', 'last_name'))
+```
+
+### The `tabstat` Function
+The `tabstat` function can be used to view statistics based on categorical
+variables within a data frame.
+```{r}
+tabstat('mpg', mtcars, by = 'cyl')
+tabstat('mpg', mtcars, by = 'cyl', fns = list(median, IQR, length))
+```
+
+### The `mdesc` Function
+The `mdesc` function gives a description of missing values in a data frame, and
+where they are located.
+```{r}
+df <- data.frame(
+  a = 1:5,
+  b = c(2, 3, NA, 4, 5),
+  c = c(NA, 'x', 'y', 'z', NA)
+)
+mdesc(df)
+```
+
+## Quick Functions of Narrow Use
+### The `colMatcher` Function
+The `colMatcher` function tells the user if any two columns are identical.
+```{r}
+df <- data.frame(
+  x = 1:5,
+  y = 101:105,
+  z = 1:5,
+  w = 101:105,
+  v = letters[1:5]
+)
+colMatcher(df)
+colMatcher(df, return_index = TRUE)
+```
+
+### The `dfSplit` Function
+The `dfSplit` function splits a `data.frame` into parts, either via a
+training/test split, or a K-fold split.
+```{r}
+df <- data.frame(matrix(
+  rnorm(100 * 4), 100, 4
+))
+```
+```{r}
+split1 <- dfSplit(df, method = 'traintest', train_frac = 0.8)
+lapply(split1, dim)
+
+split2 <- dfSplit(df, method = 'traintest', train_n = 70)
+lapply(split2, dim)
+
+split3 <- dfSplit(df, method = 'kfold', K = 4)
+lapply(split3, dim)
+```
+
+### The `fullRanker` Function
+The `fullRanker` function takes a matrix or `data.frame` and successively
+removes columns until it is of full rank.
+```{r}
+X1 <- diag(4)
+X2 <- cbind(X1, 1)
+```
+```{r}
+fullRanker(X1)
+fullRanker(X2)
+```
+
+### The `unpack` Function
+The `unpack` function simply takes objects in a list, and unpacks them into
+the global (or otherwise unspecified) environment.
+```{r}
+rm(list = ls())
+ls()
+mylist <- list(a = 1:5,
+               b = letters[1:6],
+               c = rnorm(7))
+unpack(mylist)
+ls()
+```

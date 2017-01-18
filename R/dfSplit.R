@@ -14,6 +14,8 @@
 #' if \code{train_frac} is not selected.
 #'
 #' @return A list of data frames sliced from the original data.
+#'
+#' @export
 dfSplit <- function(dat, method = c("kfold", "traintest"),
                     K = NULL, train_frac = NULL, train_n = NULL)
 {

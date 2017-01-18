@@ -34,7 +34,7 @@ mdesc <- function(df) {
       'total' = total_col,
       'percent_missing' = perc_missing_col
     )
-
+    rownames(out) <- NULL
     return(out)
   } else {
     stop('Please enter a vector or data.frame!')

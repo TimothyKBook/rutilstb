@@ -11,3 +11,6 @@ Description: Some quick, simple, easy utilities I wrote that may be
 License: MIT
 LazyData: TRUE
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

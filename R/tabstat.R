@@ -21,12 +21,12 @@ tabstat <- function(var, data, by = NULL,
   fn_names <- gsub("list\\(", "", fn_names)
   fn_names <- gsub("\\)", "", fn_names)
   fn_names <- trimws(fn_names)
+  
+  out_df <- aggregate(data, by = data[by], FUN = identity)[by]
 
   if (na.rm) {
     data <- data[complete.cases(data[var]),]
   }
-  
-  out_df <- aggregate(data, by = data[by], FUN = identity)[by]
   
   for (fn in fns) {
     agg <- aggregate(data[var], by = data[by], FUN = fn)
